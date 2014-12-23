@@ -14,20 +14,26 @@
 # or from the Free Software Foundation, 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA
 
+
 # This value of prefix will usually be overridden
 prefix=/usr/local
 
-.PHONY: all install clean realclean newworld
 
-CPPFLAGS=-DFAST 
+TARGET = oakworld.bin
 
-all:
-	$(MAKE) -C emulator $@
 
-install clean realclean:
-	$(MAKE) -C emulator $@
-	$(MAKE) -C world $@
+.PHONY: all install clean realclean newworld cleanworld
+
+all clean realclean cleanworld:
+	$(MAKE) -f Makefile2 $@
 
 newworld:
-	$(MAKE) -C emulator all
-	$(MAKE) -C world cleanworld all
+	$(MAKE) -f Makefile2 cleanworld all
+
+
+idir=$(prefix)/lib/oaklisp
+
+install: # $(TARGET)
+	mkdir --parents $(idir)
+	cp -a $(TARGET) $(idir)/
+

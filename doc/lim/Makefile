@@ -36,6 +36,10 @@ lim.ps: lim.dvi
 
 .PHONY: clean
 clean:
-	-rm -f lim.bbl lim.blg lim.dvi lim.ps lim.pdf
+	-rm -f lim.bbl lim.blg lim.dvi lim.ps
 	-rm -f lim.idx lim.ilg lim.ind lim.log lim.toc
 	-rm -f *.aux
+
+.PHONY: realclean
+realclean: clean
+#	-rm -f lim.pdf

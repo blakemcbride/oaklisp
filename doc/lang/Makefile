@@ -41,6 +41,10 @@ lang.ps: lang.dvi $(OSRC)
 
 .PHONY: clean
 clean:
-	-rm -f lang.bbl lang.blg lang.dvi lang.ps lang.pdf
+	-rm -f lang.bbl lang.blg lang.dvi lang.ps
 	-rm -f lang.idx lang.ilg lang.ind lang.log lang.toc
 	-rm -f *.aux
+
+.PHONY: realclean
+realclean: clean
+#	-rm -f lang.pdf

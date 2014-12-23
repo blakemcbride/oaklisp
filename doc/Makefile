@@ -17,9 +17,9 @@
 # This value of prefix will usually be overridden
 prefix=/usr/local
 
-.PHONY: all clean
+.PHONY: all clean realclean
 
-all clean:
+all clean realclean:
 	$(MAKE) -C lang $@
 	$(MAKE) -C lim  $@
 
@@ -27,7 +27,7 @@ d=$(DESTDIR)$(prefix)/share/doc/oaklisp
 
 .PHONY: install
 install:
-	$(MAKE) -C lang lang.pdf
-	$(MAKE) -C lim  lim.pdf
+#	$(MAKE) -C lang lang.pdf
+#	$(MAKE) -C lim  lim.pdf
 	mkdir --parents $d
 	cp -a lang/lang.pdf lim/lim.pdf $d/

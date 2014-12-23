@@ -14,8 +14,22 @@
 # or from the Free Software Foundation, 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA
 
-.PHONY: all install clean
-all install clean:
+prefix=/usr/local
+
+
+.PHONY: all install clean realclean newworld docs
+
+all:
+	$(MAKE) -C src $@ prefix=$(prefix)
+
+install clean realclean:
+	$(MAKE) -C src $@ prefix=$(prefix)
+	$(MAKE) -C doc $@ prefix=$(prefix)
+	$(MAKE) -C man $@ prefix=$(prefix)
+
+newworld:
 	$(MAKE) -C src $@
-	$(MAKE) -C doc $@
-	$(MAKE) -C man $@
+
+docs:
+	$(MAKE) -C doc all
+	$(MAKE) -C man all

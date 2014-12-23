@@ -19,7 +19,7 @@ prefix=/usr/local
 
 d=$(DESTDIR)$(prefix)/share/man/man1
 
-.PHONY: all install clean
+.PHONY: all install clean realclean
 
 all:
 
@@ -27,4 +27,4 @@ install:
 	mkdir --parents $d
 	cp -a man1/oaklisp.1 $d/
 
-clean:
+clean realclean:

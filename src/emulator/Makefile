@@ -30,8 +30,8 @@ oobj=$(osrc:.c=.o)
 
 all: $(progs)
 
-CFLAGS += -O2 -g -Wall
-LOADLIBES = -lpthread
+CFLAGS += -O2 -g -Wall -m32
+LOADLIBES = -lpthread -m32
 
 OAK=oaklisp
 
@@ -73,7 +73,11 @@ install: $(progs)
 
 .PHONY: clean
 clean:
-	-rm -f $(progs) $(psrc:.c=.o) $(osrc:.c=.o) $(dfiles) TAGS
+	-rm -f $(psrc:.c=.o) $(osrc:.c=.o) $(dfiles) TAGS
+
+.PHONY: realclean
+realclean: clean
+	-rm -f $(progs)
 
 .PHONY: indent
 indent: $(psrc) $(osrc) $(hsrc)
