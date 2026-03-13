@@ -75,7 +75,7 @@ char *argless_instr_name[] = {
   "TEST-AND-SET-LOCATIVE",
   "THREAD-YIELD",		/* 72 */
   "DUMP-WORLD",
-  "ILLEGAL-ARGLESS-74",
+  "LOAD-WORLD",
   "ILLEGAL-ARGLESS-75",
   "ILLEGAL-ARGLESS-76",
   "ILLEGAL-ARGLESS-77",
