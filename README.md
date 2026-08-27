@@ -9,8 +9,10 @@ Below is the normal README for Oaklisp.  I cloned it and, with the help of Claud
 7. Added full support for native threads (green threads were already supported)
 8. Added a concurrent GC
 9. Updated version to 2.1.0
-10. Bootstrap from source alone: `./configure --enable-bootstrap` compiles the
-    world's objects from the .oak sources with a Guile-hosted copy of the real
+10. Optional bootstrap from source alone.  By default the build still uses the
+    precompiled .oa files in prebuilt/, as before.  With
+    `./configure --enable-bootstrap` (requires Guile 3) the world's objects are
+    instead compiled from the .oak sources by a Guile-hosted copy of the real
     Oaklisp compiler, so no prebuilt .oa files are needed (see BUILD.md)
 
 This repo is located at:  https://github.com/blakemcbride/oaklisp
