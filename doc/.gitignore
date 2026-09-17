@@ -7,5 +7,5 @@
 *.ilg
 *.ind
 *.log
-*.pdf
+*-eps-converted-to.pdf
 *.toc

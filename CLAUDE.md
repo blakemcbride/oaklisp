@@ -15,7 +15,7 @@ doc/lim/            Implementation manual (LaTeX)
 doc/summary/        Concise programmer reference (LaTeX)
 doc/examples/       Example Oaklisp programs
 man/man1/           Man page template (oaklisp.1.in)
-prebuilt/           Prebuilt bootstrap artifacts (worlds, PDFs, instr-data.c)
+prebuilt/           Prebuilt bootstrap artifacts (worlds, instr-data.c)
 debian/             Debian packaging
 m4/                 Autoconf macros
 ```

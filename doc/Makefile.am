@@ -25,7 +25,7 @@ EXTRA_DIST = $(LATEX_SRCS)
 
 .tex.pdf:
 	$(LATEXMK) -cd -pdf $< \
-	 || cp ../prebuilt/doc/$@ $@
+	 || echo "latexmk failed; using existing $@"
 
 EXTRA_DIST += examples/bank-example.oak examples/change.oak		\
  examples/test-bank-example.oak examples/unit-testing.oak		\
@@ -38,9 +38,7 @@ EXTRA_DIST += examples/bank-example.oak examples/change.oak		\
  lim/methods.tex lim/oaklevel.tex lim/stack.tex mandefs.tex		\
  oakman.bib
 
-CLEANFILES = $(LATEX_PDFS)
-
-CLEANFILES += lang/control.aux lang/cover.aux lang/dynamic.aux		\
+CLEANFILES = lang/control.aux lang/cover.aux lang/dynamic.aux		\
  lang/intro.aux lang/io.aux lang/lang.aux lang/lang.bbl lang/lang.blg	\
  lang/lang.fdb_latexmk lang/lang.fls lang/lang.idx lang/lang.ilg	\
  lang/lang.ind lang/lang.log lang/lang.toc lang/locales.aux		\
