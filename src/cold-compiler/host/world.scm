@@ -152,7 +152,7 @@
 		 (ELSE
 		  (LET ((OP (MAKE (MIX-TYPES OC-MIXER (LIST OPEN-CODED-MIXIN OPERATION))
 				  (LIST (LIST (QUOTE STREAM-PRIMITIVE) N))
-				  (NTH (QUOTE (0 0 0 2 2 2 1 1 2 1 1 1 2 2 4)) N)
+				  (NTH (QUOTE (0 0 0 2 2 2 1 1 2 1 1 1 2 2 4 4)) N)
 				  1)))
 		    (SET! SP-ALIST (CONS (CONS N OP) SP-ALIST))
 		    OP)))))))

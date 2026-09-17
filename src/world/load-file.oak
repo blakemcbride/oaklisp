@@ -22,6 +22,18 @@
 ;;; an explicit extension.  Can also be given an explicit locale as an
 ;;; optional second argument.
 
+;;; True if FIRST was modified more recently than SECOND.  Both names
+;;; are strings; if either file is missing the answer is #f.  The
+;;; loader uses this to prefer a source file that has been edited since
+;;; it was last compiled.
+
+(define (file-newer? first second)
+  (let ((first (#^string first))
+	(second (#^string second)))
+    ((%stream-primitive 15)
+     (make-locative (%vref first 0)) (length first)
+     (make-locative (%vref second 0)) (length second))))
+
 (let* ((load-with-ext
 	;; Return file if found and loaded, #f or error if not found
 	;; depending on not-found-okay.
@@ -58,10 +70,15 @@
 		     (lambda (ext)
 		       (load-with-ext (file-base file) ext locale #f)))
 
-		    ;; Try lots of different filetypes.
+		    ;; Try lots of different filetypes.  A source file
+		    ;; edited since its object was last compiled wins, so
+		    ;; a stale .oa cannot shadow a fresh .oak.
 		    ((any? (lambda (ext)
 			     (load-with-ext file ext locale #t))
-			   '(".oa" ".oak" ".omac"))
+			   (if (file-newer? (append file ".oak")
+					    (append file ".oa"))
+			       '(".oak" ".oa" ".omac")
+			       '(".oa" ".oak" ".omac")))
 		     =>
 		     (lambda (ext)
 		       (format #t "~&Loaded ~A~A.~%" file ext)))

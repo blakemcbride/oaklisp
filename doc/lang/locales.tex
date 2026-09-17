@@ -50,9 +50,13 @@ that the program's semantics are preserved.
 Oaklisp source files have a default extension of \df{.oak} while
 compiled files are given the extension \df{.oa}.  \df{compile-file}
 first tries to read the file \emph{file-name}\df{.oak}, and then looks
-for \emph{file-name}, while \df{load} looks first for
+for \emph{file-name}, while \df{load} looks for
 \emph{file-name}\df{.oa}, then for \emph{file-name}\df{.oak}, and finally for
-\emph{file-name}.}
+\emph{file-name}.  When both \emph{file-name}\df{.oa} and
+\emph{file-name}\df{.oak} exist, \df{load} uses whichever was modified
+more recently, so a source file edited after it was last compiled is
+not shadowed by a stale object; if their modification times are equal
+the compiled file wins.}
 
 
 

@@ -67,6 +67,10 @@ bin & Oaklisp world --- binary representation of\\
     (compile-file #*current-locale "myfile") ; compiles myfile.oak to myfile.oa
 \end{verbatim}
 
+Given only a base name, \emph{load} uses whichever of \emph{myfile.oa}
+or \emph{myfile.oak} was modified more recently, so a source edited
+after it was compiled is not shadowed by a stale object.
+
 \newpage
 
 {\Large \bfseries Data Types}

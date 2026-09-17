@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
 #ifndef FAST
 #undef NDEBUG
 #endif
@@ -2434,6 +2435,44 @@ loop(ref_t initial_tos)
 		    PEEKVAL() = rename(from, to) == 0 ? e_t : e_nil;
 		    free(from);
 		    free(to);
+		  }
+		  GOTO_TOP;
+
+		case 15:	/* file-newer? loc1 len1 loc2 len2 */
+		  {
+		    /* Answer #t only if both files exist and the first
+		       has a strictly later modification time.  The
+		       loader uses this to prefer a .oak source that is
+		       newer than its .oa object.  Arguments arrive like
+		       RENAME's: loc1, len1, loc2, len2, reading down
+		       from the top of the stack. */
+		    ref_t z;
+		    char *first, *second;
+		    struct stat st1, st2;
+
+		    {
+		      ref_t *second_loc;
+
+		      MAKE_BACK_VAL_PTR(second_loc, 2);
+		      if (!TAG_IS(PEEKVAL(), LOC_TAG)
+			  || !TAG_IS(*second_loc, LOC_TAG))
+			TRAP0(4);
+		    }
+
+		    POPVAL(x);	/* locative to the first name */
+		    POPVAL(y);	/* length of the first name */
+		    POPVAL(z);	/* locative to the second name */
+		    first = oak_c_string((ref_t *) LOC_TO_PTR(x),
+					 REF_TO_INT(y));
+		    second = oak_c_string((ref_t *) LOC_TO_PTR(z),
+					  REF_TO_INT(PEEKVAL()));
+
+		    PEEKVAL()
+		      = (stat(first, &st1) == 0
+			 && stat(second, &st2) == 0
+			 && st1.st_mtime > st2.st_mtime) ? e_t : e_nil;
+		    free(first);
+		    free(second);
 		  }
 		  GOTO_TOP;
 
