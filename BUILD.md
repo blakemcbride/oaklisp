@@ -208,6 +208,9 @@ Running Oaklisp
 	# Interactive REPL
 	oaklisp
 
+	# From the build tree, without installing
+	./src/emulator/oaklisp --world src/world/oakworld.bin
+
 	# With explicit world
 	oaklisp --world /path/to/oakworld.bin
 
